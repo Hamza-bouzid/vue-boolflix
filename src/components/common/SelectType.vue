@@ -28,4 +28,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.select {
+  margin-right: 10px;
+  select {
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    background-color: #212121;
+    color: #fff;
+    outline: none;
+  }
+}
+</style>

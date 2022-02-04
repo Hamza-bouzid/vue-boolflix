@@ -4,8 +4,8 @@
       <div class="logo">
         <h1>Boolflix</h1>
       </div>
-      <SelectType @select="selectTypeToWatch" />
       <div class="search">
+        <SelectType @select="selectTypeToWatch" />
         <Search @cerca="searchByName" />
       </div>
     </div>
@@ -123,6 +123,10 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 50px;
+}
+
+.search {
+  display: flex;
 }
 
 .heading {
