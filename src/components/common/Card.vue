@@ -4,7 +4,7 @@
     <div class="card-front">
       <img v-if="card.poster_path" :src="image + card.poster_path" />
       <img v-else-if="card.backdrop_path" :src="image + card.backdrop_path" />
-      <img v-else-if="card.profile_path" :src="image + card.profile_path" />
+      <!-- <img v-else-if="card.profile_path" :src="image + card.profile_path" /> -->
       <img v-else src="../../assets/img/no-picture.webp" />
     </div>
     <!--Card Back-->
@@ -30,7 +30,7 @@ export default {
 
   data() {
     return {
-      image: "https://image.tmdb.org/t/p/w500",
+      image: "https://image.tmdb.org/t/p/w342",
       flagImage: "https://flagcdn.com/24x18/",
     };
   },

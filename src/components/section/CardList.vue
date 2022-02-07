@@ -18,6 +18,12 @@
         <div class="cards">
           <Card v-for="(element, index) in listaFilm" :key="index" :card="element" />
         </div>
+
+        <div class="nextPrev">
+          <button :class="{ hidden: pageFilm == 1 }" @click="prevPage('film')"><i class="fas fa-chevron-left"></i> {{ pageFilm - 1 }}</button>
+          <span>{{ pageFilm }}</span>
+          <button :class="{ hidden: pageFilm == totalPagesFilm }" @click="nextPage('film')">{{ pageFilm + 1 }} <i class="fas fa-chevron-right"></i></button>
+        </div>
       </div>
       <div v-if="showTv" class="serieTV">
         <div class="type">
@@ -25,6 +31,12 @@
         </div>
         <div class="cards">
           <Card v-for="(elemento, indice) in listaTv" :key="indice" :card="elemento" />
+        </div>
+
+        <div class="nextPrev">
+          <button :class="{ hidden: pageTv == 1 }" @click="prevPage('tv')"><i class="fas fa-chevron-left"></i> {{ pageTv - 1 }}</button>
+          <span>{{ pageTv }}</span>
+          <button :class="{ hidden: pageTv == totalPagesTv }" @click="nextPage('tv')">{{ pageTv + 1 }} <i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
     </div>
@@ -53,6 +65,10 @@ export default {
       showTv: false,
       search: "",
       type: "",
+      pageTv: 1,
+      pageFilm: 1,
+      totalPagesFilm: null,
+      totalPagesTv: null,
     };
   },
 
@@ -64,11 +80,14 @@ export default {
             api_key: "a98e27fc86b1afd6d8445aaa1cefc645",
             query: this.search,
             include_adult: "false",
+            page: this.pageFilm,
           },
         })
         .then((risposta) => {
           this.listaFilm = risposta.data.results;
           console.log(this.listaFilm);
+          this.totalPagesFilm = risposta.data.total_pages;
+          console.log(this.totalPagesFilm);
         });
     },
     getCardTv: function () {
@@ -78,11 +97,14 @@ export default {
             api_key: "a98e27fc86b1afd6d8445aaa1cefc645",
             query: this.search,
             include_adult: "false",
+            page: this.pageTv,
           },
         })
         .then((risposta) => {
           this.listaTv = risposta.data.results;
           console.log(this.listaTv);
+          this.totalPagesTv = risposta.data.total_pages;
+          console.log(this.totalPagesTv);
         });
     },
 
@@ -108,6 +130,27 @@ export default {
         this.showTv = true;
       }
     },
+
+    nextPage: function (tipo) {
+      if (tipo == "film") {
+        this.pageFilm++;
+        this.getCardMovies();
+      } else if (tipo == "tv") {
+        this.pageTv++;
+        this.getCardTv();
+      }
+    },
+    prevPage: function (tipo) {
+      if (this.pageFilm >= 2 || this.pageTv >= 2) {
+        if (tipo == "film") {
+          this.pageFilm--;
+          this.getCardMovies();
+        } else if (tipo == "tv") {
+          this.pageTv--;
+          this.getCardTv();
+        }
+      }
+    },
   },
 };
 </script>
@@ -122,7 +165,6 @@ export default {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 50px;
 }
 
 .search {
@@ -146,8 +188,35 @@ export default {
   }
 }
 
+.serieTv,
+.film {
+  margin-bottom: 60px;
+}
+
 .type {
   text-align: center;
   font-size: 40px;
+}
+
+.nextPrev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    background-color: #b6141a;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0px 10px;
+  }
+
+  i {
+    margin: 0px 3px;
+  }
+}
+
+.hidden {
+  visibility: hidden;
 }
 </style>
