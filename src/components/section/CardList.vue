@@ -115,6 +115,8 @@ export default {
 
     searchByName: function (input) {
       this.search = input;
+      this.pageTv = 1;
+      this.pageFilm = 1;
       if (this.type == "film") {
         this.getCardMovies();
         this.showFilm = true;
