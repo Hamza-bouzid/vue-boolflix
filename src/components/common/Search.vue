@@ -17,15 +17,16 @@ export default {
 
   methods: {
     getInput: function () {
-      this.$emit("cerca", this.searchInput);
-      this.searchInput = "";
+      if (this.searchInput.length > 0) {
+        this.$emit("cerca", this.searchInput);
+        this.searchInput = "";
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .search {
   input {
     padding: 5px 20px;
@@ -37,11 +38,10 @@ export default {
 
   button {
     padding: 5px 10px;
-     border: 1px solid #b6141a;
-     background-color: #b6141a;
-     color: #fff;
-     cursor: pointer;
+    border: 1px solid #b6141a;
+    background-color: #b6141a;
+    color: #fff;
+    cursor: pointer;
   }
 }
-
 </style>
