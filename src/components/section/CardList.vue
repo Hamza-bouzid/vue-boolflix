@@ -2,7 +2,7 @@
   <div class="cardList">
     <div class="heading">
       <div class="logo">
-        <img src="../../assets/img/boolflix.png" alt="Boolflix" />
+        <a href="http://localhost:8080"><img src="../../assets/img/boolflix.png" alt="Boolflix" /></a>
       </div>
       <div class="search">
         <SelectType @select="selectTypeToWatch" />
@@ -14,7 +14,9 @@
       <div v-if="showFilm" class="film">
         <div class="type">
           <h2>Film</h2>
-          <h3>Risultato Ricerca | <span>{{ search }}</span></h3>
+          <h3>
+            Risultato Ricerca | <span>{{ search }}</span>
+          </h3>
         </div>
         <div class="cards">
           <Card v-for="(element, index) in listaFilm" :key="index" :card="element" />
@@ -39,7 +41,9 @@
       <div v-if="showTv" class="serieTV">
         <div class="type">
           <h2>Serie Tv</h2>
-          <h3>Risultato Ricerca | <span>{{ search }}</span></h3>
+          <h3>
+            Risultato Ricerca | <span>{{ search }}</span>
+          </h3>
         </div>
         <div class="cards">
           <Card v-for="(elemento, indice) in listaTv" :key="indice" :card="elemento" />
@@ -210,6 +214,11 @@ export default {
 .conatiner {
   max-width: 1200px;
   margin: 0 auto;
+
+  h2 {
+    font-weight: normal;
+    font-size: 50px;
+  }
 
   h3 {
     color: #808080;
